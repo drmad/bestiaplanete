@@ -1,0 +1,63 @@
+#!/usr/bin/env php8
+<?php
+if ($argc < 2)  {
+    exit ("Usage: {$argv[0]} module [table]\n");
+}
+$module = $argv[1];
+
+$table = $argv[2] ?? null;
+
+$path = __DIR__ . "/../modules/{$module}/Database/migrations/";
+
+if (!file_exists($path)) {
+    exit("Module $module (or directorio Database/migrations) not found.\n");
+}
+
+[$mseg, $serial] = explode(' ', microtime());
+$serial .= substr($mseg, 2, 4);
+
+$path .= "{$serial}.php";
+
+$module = mb_strtolower($module);
+$namespace = mb_convert_case($module,  MB_CASE_TITLE);
+
+$explanation = '';
+if ($table) {
+    $explanation = <<<EOF
+        /*
+        // Sample table creation method.
+
+        #[Action\Create]
+        public function {$module}_{$table}(Schema \$schema)
+        {
+            \$schema->field('id', FieldType::AutoIncrement);
+            // More fields definitions
+            // ...
+
+            \$schema->primaryKey('id');
+        }
+        /**/
+    EOF;
+}
+
+$creation_date = Date('Y-m-d H:i:s');
+$f = fopen ($path, 'w');
+fwrite ($f, <<<EOF
+<?php
+namespace {$namespace}\Database;
+
+use Vendimia\Database\Migration\{Schema,Action};
+use Vendimia\Database\FieldType;
+
+use {$namespace}\Model;
+
+/**
+ * Migration created {$creation_date}.
+ *
+ * Methods should be prefixed with "{$module}_"
+ */
+return new class {
+{$explanation}
+};
+EOF);
+echo "Migration created: {$path}\n";

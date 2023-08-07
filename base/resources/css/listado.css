@@ -1,0 +1,54 @@
+body {
+    --principal: rgb(15, 20, 25);
+    --atenuado: rgb(83, 100, 113);
+
+    margin: 0px;
+    font-family: sans-serif;
+    color: var(--principal);
+}
+article {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 20px;
+
+    max-width: 500px;
+    margin: 0px auto;
+
+    padding: 20px 15px;
+    border: 1px solid #f8f8f8;
+
+    @media (max-width: 480px) {
+        width: 100%;
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+        box-sizing: border-box;
+    }
+
+    div.hackergotchi img {
+        width: 100%;
+        border-radius: 25px;
+    }
+
+    div.cuerpo {
+        h1 {
+            font-size: 90%;
+            margin: 0px;
+            font-weight: normal;
+            color: var(--atenuado);
+
+            .nombre-usuario {
+                font-weight: bold;
+                color: var(--principal);
+            }
+            .nombre-blog a {
+                color: var(--atenuado);
+                text-decoration: none;
+            }
+        }
+
+        div.imagen img{
+            width: 100%;
+            border-radius: 15px;
+        }
+    }
+}

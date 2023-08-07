@@ -1,0 +1,22 @@
+{
+    "name": "vendimia/project",
+    "description": "Vendimia skeleton project",
+    "license": "GPL-3.0-or-later",
+    "keywords": ["php", "vendimia"],
+
+    "autoload": {
+        "psr-4": {
+            "": ["modules/", "base/"]
+        }
+    },
+
+    "require": {
+        "php": "^8.1",
+        "vendimia/core": "^0.1",
+        "vlucas/phpdotenv": "^5.4",
+        "vendimia/database": "^0.1.42",
+        "vendimia/form": "^0.1.18",
+        "vendimia/logger": "^0.0.6",
+        "vendimia/datetime": "^0.1.8"
+    }
+}

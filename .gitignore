@@ -1,0 +1,7 @@
+vendor
+composer.lock
+database.sqlite
+.env
+.env.example
+public/hackergotchi
+go.sh

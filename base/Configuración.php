@@ -17,5 +17,5 @@ class Configuración
      *
      * Si este parámetro es falso, obtiene el contenido en sentido contrario.
      */
-    static public $preferir_contenido_corto = false;
+    static public $preferir_contenido_corto = true;
 }

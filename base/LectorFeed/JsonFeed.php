@@ -51,14 +51,11 @@ class JsonFeed extends LectorFeedAbstract
                     $contenido = mb_substr($contenido, 0, $longitud) . '…';
                 }
 
-                if ($tipo == 'resumen') {
-                    // Texto plano
-                    $cuerpo = '<p>' . strip_tags($contenido) . '</p>';
-                } elseif ($tipo == 'texto') {
-                    $cuerpo = $this->procesarTexto($contenido);
-                } else {
-                    $cuerpo = $this->filtrarHTML($contenido);
-                }
+                $cuerpo = match ($tipo) {
+                    'resumen' => '<p>' . strip_tags($contenido) . '</p>',
+                    'texto' => $this->procesarTexto($contenido),
+                    'html' => $this->filtrarHTML($contenido),
+                };
 
                 break;
             }

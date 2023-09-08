@@ -59,6 +59,8 @@ class JsonFeed extends LectorFeedAbstract
                 } else {
                     $cuerpo = $this->filtrarHTML($contenido);
                 }
+
+                break;
             }
 
             if (!$cuerpo) {

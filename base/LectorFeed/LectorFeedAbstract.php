@@ -13,7 +13,7 @@ abstract class LectorFeedAbstract
     ];
 
     /** Estos tags HTML acepta que no se cierren */
-    const TAGS_SIN_CERRAR = ['img'];
+    const TAGS_SIN_CERRAR = ['img', 'br'];
 
     /**
      * Elimina tags HTML no permitidos.
@@ -34,6 +34,13 @@ abstract class LectorFeedAbstract
         foreach ($matches as $match) {
             $tag = $match[0];
             $nombre_tag = explode(' ', $match[1])[0];
+
+            // Los tags que no se cierran acaban en /. Si hay un / final, lo
+            // removemos
+            if (str_ends_with($nombre_tag, '/')) {
+                $nombre_tag = substr($nombre_tag, 0, -1);
+            }
+
 
             $tag_cerrado = false;
             if ($nombre_tag[0] == '/') {

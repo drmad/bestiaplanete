@@ -47,8 +47,8 @@ class JsonFeed extends LectorFeedAbstract
                 // Cortamos el post ahorita, de ser necesario, para que corrija
                 // los tags que pueden desaparecer
                 $longitud = Configuración::$máxima_longitud_post;
-                if ($longitud && strlen($contenido) > $longitud) {
-                    $contenido = substr($contenido, 0, $longitud) . '…';
+                if ($longitud && mb_strlen($contenido) > $longitud) {
+                    $contenido = mb_substr($contenido, 0, $longitud) . '…';
                 }
 
                 if ($tipo == 'resumen') {

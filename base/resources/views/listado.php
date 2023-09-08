@@ -22,8 +22,14 @@
             </div>
             <?php endif?>
 
-            <div class="links">
-                <a href="<?=$post->permalink?>" target="_blank">Leer más</a>
+            <div class="enlaces">
+                <a href="<?=$post->permalink?>" target="_blank">
+                    Sigue leyendo
+                    <?php if ($post->título): ?>
+                        <strong><?=$post->título?></strong>
+                    <?php endif?>
+                    en el blog &raquo;
+                </a>
             </div>
         </div>
     </article>

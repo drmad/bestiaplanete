@@ -50,5 +50,17 @@ article {
             width: 100%;
             border-radius: 15px;
         }
+
+        div.enlaces {
+            font-size: 80%;
+            margin: 5px 0px;
+            a {
+                color: #888;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 }

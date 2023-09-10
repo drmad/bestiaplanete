@@ -3,21 +3,6 @@
 
 require __DIR__ . '/../bootstrap.php';
 
-/*$usuario = Usuarios\Database\Usuario::create(
-    nombre: 'Oliver Etchebarne',
-    alias: 'drmad'
-);
-
-$blog = Blogs\Database\Blog::create(
-    usuario: $usuario,
-    nombre: 'Melancolía al despertar',
-    url: 'https://drmad.org/blog',
-    url_feed: 'https://drmad.org/blog/feed/json',
-    tipo_feed: 'json-feed'
-);
-
-/**/
-
 $blogs = Blogs\Database\Blog::all(activo: true);
 
 foreach ($blogs as $blog) {
@@ -25,12 +10,6 @@ foreach ($blogs as $blog) {
     $lector = LectorFeed\Obtener::desdeTipo($blog->tipo_feed);
 
     $feed = file_get_contents($blog->url_feed);
-    /*if (file_exists('/tmp/feed')) {
-        $feed = file_get_contents('/tmp/feed');
-    } else {
-        $feed = file_get_contents($blog->url_feed);
-        file_put_contents('/tmp/feed', $feed);
-    }*/
     $lector->procesar($blog, $feed);
 
 }

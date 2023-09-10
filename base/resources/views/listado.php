@@ -1,4 +1,7 @@
-<?php foreach ($posts as $post):
+<?php
+$this->title = 'IcaPlanet';
+
+foreach ($posts as $post):
     $blog = $post->blog->load();
     $usuario = $blog->usuario->load();
 ?>

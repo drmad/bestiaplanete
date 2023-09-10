@@ -6,13 +6,13 @@
         <div class="hackergotchi">
             <img src="<?=$usuario->getModel()->obtenerUrlHackergotchi()?>" />
         </div>
-        <div class="cuerpo">
+        <div class="contenido">
             <h1>
                 <span class="nombre-usuario"><?=$usuario->getModel()->obtenerNombreParaMostrar()?></span>
                 <span class="nombre-blog"><a href="<?=$blog->url?>"><?=$blog->nombre?></a></span> ·
                 <span class="fecha-publicación"><?=$post->fecha_publicación?></span>
             </h1>
-            <div>
+            <div class="cuerpo">
                 <?=$post->cuerpo?>
             </div>
 

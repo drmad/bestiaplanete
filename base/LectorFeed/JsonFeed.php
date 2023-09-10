@@ -25,8 +25,8 @@ class JsonFeed extends LectorFeedAbstract
             if (Configuración::$preferir_contenido_corto) {
                 $origen = [
                     'resumen' => $ítem->summary ?? '',
-                    'texto' => $ítem->content_text ?? '',
                     'html' => $ítem->content_html ?? '',
+                    'texto' => $ítem->content_text ?? '',
                 ];
             } else {
                 $origen = [

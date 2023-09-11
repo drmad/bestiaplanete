@@ -9,7 +9,8 @@ abstract class LectorFeedAbstract
     /** Lista de tags HTML permitidos */
     const TAGS_HTML_PERMITIDOS = [
         'p', 'div', 'span', 'a', 'b', 'i', 'strong', 'em', 'h1', 'h2', 'h3',
-        'h4', 'h5', 'h6', 'code', 'pre', 'img', 'figure', 'ul', 'ol', 'blockquote'
+        'h4', 'h5', 'h6', 'code', 'pre', 'img', 'figure', 'ul', 'ol', 'li',
+        'blockquote'
     ];
 
     /** Estos tags HTML acepta que no se cierren */

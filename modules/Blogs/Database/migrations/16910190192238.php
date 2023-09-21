@@ -18,8 +18,11 @@ return new class {
         $schema->field('id', FieldType::AutoIncrement);
         $schema->field('usuario_id', FieldType::ForeignKey);
         $schema->field('nombre', FieldType::Char, length: 128);
+        $schema->field('descripción', FieldType::Char, length: 128, after: 'nombre');
         $schema->field('url', FieldType::Char, length: 256);
+        $schema->field('hash_url', FieldType::Char, length: 64);
         $schema->field('url_feed', FieldType::Char, length: 256);
+        $schema->field('url_ícono', FieldType::Char, length: 256, null: true);
         $schema->field('tipo_feed', FieldType::Enum, values: ['json-feed']);
         $schema->field('activo', FieldType::Boolean, default: true);
 

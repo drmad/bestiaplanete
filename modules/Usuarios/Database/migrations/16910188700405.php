@@ -16,9 +16,11 @@ return new class {
     public function usuarios_usuario(Schema $schema)
     {
         $schema->field('id', FieldType::AutoIncrement);
+        $schema->field('usuario', FieldType::Char, length: 32);
         $schema->field('nombre', FieldType::Char, length: 128);
-        $schema->field('alias', FieldType::Char, length: 32);
+        $schema->field('hash', FieldType::Char, length: 32);
 
         $schema->primaryKey('id');
+        $schema->uniqueIndex('usuario');
     }
 };

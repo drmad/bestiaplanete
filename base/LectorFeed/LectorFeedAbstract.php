@@ -2,7 +2,7 @@
 
 namespace LectorFeed;
 
-use Blogs\Database\Blog;
+use Blogs\Database\{Blog, Post};
 
 abstract class LectorFeedAbstract
 {
@@ -95,11 +95,35 @@ abstract class LectorFeedAbstract
     }
 
     /**
+     * Graba o actualizar un post en un blog con la info obtenida de procesar()
+     */
+    public function grabarPost(Blog $blog, array $información_posts)
+    {
+        foreach ($información_posts as $información_post) {
+            // Buscamos si existe el post
+            $post = Post::obtenerPorIdentificador($información_post['identificador']);
+
+            if (!$post) {
+                $post = new Post;
+            }
+
+            $información_post['blog'] = $blog;
+            $post->update(...$información_post);
+        }
+    }
+
+    /**
      * Procesa un feed, añadiendo o actualizando los post en $blog
      *
-     * @var Blog $blog Blog donde añadir o actualizar los posts
      * @var string $feed Origen del feed sin procesar. Debería ser pasado como
      *                   referencia.
+     * @return array
      */
-    abstract public function procesar(Blog $blog, &$feed);
+    abstract public function procesar(&$feed): array;
+
+    /**
+     * Devuelve el tipo del feed
+     */
+    abstract public function obtenerTipo(): string;
+
 }

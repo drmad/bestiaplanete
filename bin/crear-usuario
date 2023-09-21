@@ -1,0 +1,21 @@
+#!/usr/bin/env php8
+<?php
+require __DIR__ . '/../bootstrap.php';
+
+if ($argc < 3) {
+    echo "Uso: {$argv[0]} alias-usuario nombre completo\n";
+    exit(1);
+}
+
+// Ignoramos el 0
+array_shift($argv);
+
+$usuario = array_shift($argv);
+$nombre = join(' ', $argv);
+
+Usuarios\Database\Usuario::create(
+    usuario: $usuario,
+    nombre: $nombre,
+);
+
+echo "Usuario $usuario ({$nombre}) creado.\n";

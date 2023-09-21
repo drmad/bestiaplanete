@@ -16,9 +16,24 @@ use Configuración;
  */
 class JsonFeed extends LectorFeedAbstract
 {
-    public function procesar(Blog $blog, &$feed)
+    public function obtenerTipo(): string
+    {
+        return 'json-feed';
+    }
+
+    public function procesar(&$feed): array
     {
         $json = json_decode($feed);
+
+        $blog = [];
+        $posts = [];
+
+
+        $blog = [
+            'nombre' => $json->title,
+            'descripción' => $json->description,
+            'url' => $json->home_page_url,
+        ];
 
         foreach ($json->items as $ítem) {
 
@@ -64,7 +79,19 @@ class JsonFeed extends LectorFeedAbstract
                 throw new Exception();
             }
 
-            // Buscamos si existe el post
+            $posts[] = [
+                "identificador" => $ítem->id,
+                "fecha_publicación" => new DateTime($ítem->date_published ?? null),
+                "fecha_modificación" => new DateTime($ítem->date_modified ?? null),
+                "url_imagen" => $ítem->image ?? null,
+                "título" => $ítem->title ?? null,
+                "cuerpo" => $cuerpo,
+                "permalink" => $ítem->url,
+            ];
+
+
+
+            /*// Buscamos si existe el post
             $post = Post::obtenerPorIdentificador($ítem->id);
 
             if (!$post) {
@@ -80,7 +107,9 @@ class JsonFeed extends LectorFeedAbstract
                 título: $ítem->title ?? null,
                 cuerpo: $cuerpo,
                 permalink: $ítem->url,
-           );
+            );*/
         }
+
+        return compact('blog', 'posts');
     }
 }

@@ -12,22 +12,17 @@ class Usuario
     }
 
     /**
-     *
+     * Retorna la ruta del hackergotchi del usuario
      */
     public function obtenerUrlHackergotchi()
     {
-        $ruta = 'public/hackergotchi/' .
-            md5("nnntucomoloariaaaass{$this->usuario->pk()}") .
-            '.jpg'
-        ;
-
-        return $ruta;
+        return "public/hackergotchi/{$this->usuario->hash}.jpg";
     }
 
     public function obtenerNombreParaMostrar()
     {
-        if ($this->usuario->alias) {
-            return $this->usuario->alias;
+        if ($this->usuario->usuario) {
+            return $this->usuario->usuario;
         }
 
         $this->usuario->nombre;

@@ -1,0 +1,73 @@
+#!/usr/bin/env php8
+<?php
+require __DIR__ . '/../bootstrap.php';
+
+if ($argc < 3) {
+    echo "Uso: {$argv[0]} alias-usuario url-feed\n";
+    exit(1);
+}
+
+$alias_usuario = $argv[1];
+$url_feed = $argv[2];
+
+$usuario = Usuarios\Database\Usuario::get(usuario: $alias_usuario);
+
+if (!$usuario) {
+    echo "ERROR: Usuario '{$alias_usuario}' no existe.\n";
+    exit(2);
+}
+
+$cabecera = [];
+
+$c = curl_init($url_feed);
+curl_setopt_array($c,[
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HEADERFUNCTION => function($c, $línea) use (&$cabecera) {
+        $cabecera[] = trim($línea);
+        return strlen($línea);
+    },
+]);
+$resultado = curl_exec($c);
+
+$mime = null;
+
+// Buscamos el tipo mime
+foreach ($cabecera as $entrada) {
+    $partes = explode(':', strtolower($entrada));
+
+    $nombre = trim($partes[0]);
+
+    if ($nombre == 'content-type') {
+        $mime = trim($partes[1]);
+        break;
+    }
+}
+
+if (!$mime) {
+    echo "ERROR: Feed '{$url_feed}' no devuelve un content-type";
+    exit(3);
+}
+
+$lector = LectorFeed\Obtener::desdeTipoMime($mime);
+
+$info = $lector->procesar($resultado);
+
+// No debe existir la url
+$blog = Blogs\Database\Blog::get(hash_url: hash('sha256', $info['blog']['url']));
+
+if ($blog) {
+    echo "ERROR: El blog '{$blog->nombre}' ya está registrado\n";
+    exit(4);
+}
+
+// Okey, creamos el blog
+$info['blog']['url_feed'] = $url_feed;
+$info['blog']['tipo_feed'] = $lector->obtenerTipo();
+
+$usuario->blogs->append(
+    $blog = new Blogs\Database\Blog(...$info['blog'])
+);
+
+
+echo "Blog '{$blog->nombre}' registrado para el usuario '{$usuario->nombre}'\n";
+

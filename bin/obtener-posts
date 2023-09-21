@@ -10,6 +10,7 @@ foreach ($blogs as $blog) {
     $lector = LectorFeed\Obtener::desdeTipo($blog->tipo_feed);
 
     $feed = file_get_contents($blog->url_feed);
-    $lector->procesar($blog, $feed);
+    $info = $lector->procesar($feed);
+    $lector->grabarPost($blog, $info['posts']);
 
 }

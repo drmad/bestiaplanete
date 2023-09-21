@@ -25,7 +25,8 @@ class Obtener
         $mime = strtolower(explode(';', $mime)[0]);
 
         $clase = match($mime) {
-            'application/feed+json' => JsonFeed::class
+            'application/feed+json',
+            'application/json' => JsonFeed::class
         };
 
         return new $clase;

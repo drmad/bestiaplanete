@@ -31,8 +31,8 @@ class JsonFeed extends LectorFeedAbstract
 
         $blog = [
             'nombre' => $json->title,
-            'descripción' => $json->description,
-            'url' => $json->home_page_url,
+            'descripción' => $json->description ?? '',
+            'url' => $json->home_page_url ?? '',
         ];
 
         foreach ($json->items as $ítem) {

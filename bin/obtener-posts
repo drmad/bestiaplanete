@@ -9,7 +9,13 @@ foreach ($blogs as $blog) {
 
     $lector = LectorFeed\Obtener::desdeTipo($blog->tipo_feed);
 
-    $feed = file_get_contents($blog->url_feed);
+    $feed = trim(file_get_contents($blog->url_feed));
+
+    if (!$feed) {
+        echo "No pude obtenet feed de $blog->nombre ($blog->url_feed)\n";
+        continue;
+    }
+
     $info = $lector->procesar($feed);
     $lector->grabarPost($blog, $info['posts']);
 

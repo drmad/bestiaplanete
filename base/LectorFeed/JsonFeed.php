@@ -88,7 +88,6 @@ class JsonFeed extends LectorFeedAbstract
                 'título' => $ítem->title ?? null,
                 'cuerpo' => $cuerpo,
                 'permalink' => $ítem->url,
-                'tags' => $ítem->tags,
             ];
         }
 

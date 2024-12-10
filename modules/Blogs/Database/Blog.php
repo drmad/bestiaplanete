@@ -38,7 +38,7 @@ class Blog extends Entity
     public $tipo_feed;
 
     #[Field\Boolean(default: true)]
-    public $activo;
+    public bool $activo = true;
 
     public function crearHashUrl()
     {

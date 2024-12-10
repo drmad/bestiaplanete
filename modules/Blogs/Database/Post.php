@@ -38,11 +38,11 @@ class Post extends Entity
     #[Field\Text]
     public $cuerpo;
 
-    #[Field\Char(512, default: false)]
-    public $url_imagen;
+    #[Field\Char(512, null: true, default: null)]
+    public ?string $url_imagen = null;
 
-    #[Field\Char(512, default: false)]
-    public $permalink;
+    #[Field\Char(512, null: true, default: null)]
+    public ?string $permalink = null;
 
     public function preSave()
     {

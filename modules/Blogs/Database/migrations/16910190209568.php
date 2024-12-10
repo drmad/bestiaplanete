@@ -23,8 +23,8 @@ return new class {
         $schema->field('fecha_modificación', FieldType::DateTime);
         $schema->field('título', FieldType::Char, length: 128, null: true);
         $schema->field('cuerpo', FieldType::Text);
-        $schema->field('url_imagen', FieldType::Char, length: 512, default: false);
-        $schema->field('permalink', FieldType::Char, length: 512, default: false);
+        $schema->field('url_imagen', FieldType::Char, length: 512, null: true, default: null);
+        $schema->field('permalink', FieldType::Char, length: 512, null: true, default: null);
 
         $schema->primaryKey('id');
         $schema->index('identificador_hashed');

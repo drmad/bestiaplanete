@@ -29,6 +29,29 @@ abstract class LectorFeedAbstract
         // Lista para remover tags, en formato listo para strtr()
         $lista_remoción = [];
 
+        // Si hay una elipsis al final, y hay que cortar el origen, regresamos
+        // la elipsis
+        $hay_elipsis = str_ends_with($origen, '…');
+
+        // Buscamos si hay un tag incompleto, por si ha sido cortado a mitad.
+        $último_menor_qué = strrpos($origen, '<');
+
+        // Si no hay un "menor qué", entonces no hay tags. No hacemos nada
+        if ($último_menor_qué !== false) {
+            $último_mayor_qué = strrpos($origen, '>');
+
+            // El último "mayor qué" debe estar _después_ que el último "menor qué",
+            // de lo contrario, hay un tag mal formado al final
+            if ($último_mayor_qué < $último_menor_qué) {
+                // Simple, lo removemos
+                $origen = substr($origen, 0, $último_menor_qué);
+                if ($hay_elipsis) {
+                    $origen .= '…';
+                }
+            }
+        }
+
+
         $patrón = '/<(.+?)>/';
         $tags = preg_match_all($patrón, $origen, $matches, flags: PREG_SET_ORDER);
 

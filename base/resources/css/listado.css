@@ -9,9 +9,8 @@ body {
 
 a {
     color: #844;
-    text-decoration: none;
     &:hover {
-        text-decoration: underline;
+        color: #422;
     }
 }
 
@@ -88,7 +87,7 @@ article {
             font-size: 80%;
             margin: 5px 0px;
             a {
-                color: #88F;
+                color: #66a;
                 text-decoration: none;
                 &:hover {
                     text-decoration: underline;

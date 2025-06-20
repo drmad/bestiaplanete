@@ -21,7 +21,9 @@ foreach ($posts as $post):
 
             <?php if($post->url_imagen):?>
             <div class="imagen">
-                <img src="<?=$post->url_imagen?>" />
+                <a href="<?=$post->permalink?>" target="_blank">
+                    <img src="<?=$post->url_imagen?>" />
+                </a>
             </div>
             <?php endif?>
 

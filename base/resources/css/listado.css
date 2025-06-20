@@ -6,6 +6,23 @@ body {
     font-family: sans-serif;
     color: var(--principal);
 }
+
+a {
+    color: #844;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+blockquote {
+    margin: 10px 0px;
+    padding: 0px 20px;
+    border-left: 4px solid #eee;
+    font-style: italic;
+    color: #666;
+}
+
 article {
     display: grid;
     grid-template-columns: 50px 1fr;
@@ -13,9 +30,15 @@ article {
 
     max-width: 500px;
     margin: 0px auto;
+    margin-bottom: 20px;
 
     padding: 20px 15px;
-    border: 1px solid #f8f8f8;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #f8f8f8;
+    }
 
     @media (max-width: 480px) {
         width: 100%;
@@ -42,7 +65,6 @@ article {
             }
             .nombre-blog a {
                 color: var(--atenuado);
-                text-decoration: none;
             }
         }
 
@@ -66,7 +88,7 @@ article {
             font-size: 80%;
             margin: 5px 0px;
             a {
-                color: #888;
+                color: #88F;
                 text-decoration: none;
                 &:hover {
                     text-decoration: underline;

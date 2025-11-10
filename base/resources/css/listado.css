@@ -76,6 +76,8 @@ article {
             figure {
                 margin: 0px;
             }
+
+            overflow-wrap: anywhere;
         }
 
         div.imagen img{

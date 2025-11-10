@@ -7,14 +7,14 @@ use Blogs\Database\{Blog, Post};
 abstract class LectorFeedAbstract
 {
     /** Lista de tags HTML permitidos */
-    const TAGS_HTML_PERMITIDOS = [
+    const TAGS_PERMITIDOS = [
         'p', 'div', 'span', 'a', 'b', 'i', 'strong', 'em', 'h1', 'h2', 'h3',
-        'h4', 'h5', 'h6', 'code', 'pre', 'img', 'figure', 'ul', 'ol', 'li',
+        'h4', 'h5', 'h6', 'code', 'pre', 'ul', 'ol', 'li',
         'blockquote'
     ];
 
     /** Estos tags HTML acepta que no se cierren */
-    const TAGS_SIN_CERRAR = ['img', 'br'];
+    const TAGS_SIN_CERRAR = ['br'];
 
     /**
      * Elimina tags HTML no permitidos.
@@ -73,7 +73,7 @@ abstract class LectorFeedAbstract
             }
 
             // El tag está prohibido?
-            if (!in_array($nombre_tag, self::TAGS_HTML_PERMITIDOS)) {
+            if (!in_array($nombre_tag, self::TAGS_PERMITIDOS)) {
                 $lista_remoción[$tag] = '';
             }
 

@@ -52,7 +52,7 @@ class JsonFeed extends LectorFeedAbstract
                 ];
             }
 
-            $cuerpo = false;
+            $cuerpo = '';
 
             // Analizamos cada origen buscando contenido
             foreach ($origen as $tipo => $contenido) {
@@ -76,14 +76,10 @@ class JsonFeed extends LectorFeedAbstract
                 break;
             }
 
-            if (!$cuerpo) {
-                throw new Exception();
-            }
-
             $posts[] = [
                 'identificador' => $ítem->id,
-                'fecha_publicación' => new DateTime($ítem->date_published ?? null),
-                'fecha_modificación' => new DateTime($ítem->date_modified ?? null),
+                'fecha_publicación' => ($ítem->date_published ?? false) ? new DateTime($ítem->date_published ?? null) : null,
+                'fecha_modificación' => ($ítem->date_modified ?? false) ? new DateTime($ítem->date_modified ?? null) : null,
                 'url_imagen' => $ítem->image ?? null,
                 'título' => $ítem->title ?? null,
                 'cuerpo' => $cuerpo,

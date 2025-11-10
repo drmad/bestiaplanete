@@ -3,6 +3,7 @@
 namespace LectorFeed;
 
 use Blogs\Database\{Blog, Post};
+use Vendimia\DateTime\DateTime;
 
 abstract class LectorFeedAbstract
 {
@@ -128,6 +129,25 @@ abstract class LectorFeedAbstract
 
             if (!$post) {
                 $post = new Post;
+
+                // Para los nuevos posts, si no hay fecha de creación o
+                // publicación, usamos la fecha actual
+                if (!$información_post['fecha_publicación']) {
+                    $información_post['fecha_publicación'] = DateTime::now();
+                }
+                if (!$información_post['fecha_modificación']) {
+                    $información_post['fecha_modificación'] = DateTime::now();
+                }
+            }
+
+            // En este punto, si no hay fecha de creación o modificación
+            // en inforamción_post, la removemos para que no pase un null a la
+            // db
+            if (!$información_post['fecha_publicación']) {
+                unset($información_post['fecha_publicación']);
+            }
+            if (!$información_post['fecha_modificación']) {
+                unset($información_post['fecha_modificación']);
             }
 
             $información_post['blog'] = $blog;
